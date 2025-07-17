@@ -1,0 +1,30 @@
+<header>
+    <h1>Welcome to Instagrans2</h1>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="{% url "home" %}">Inicio</a></li>
+            <li><a href="{% url "login" %}">Login</a></li>
+            <li><a href="{% url "register" %}">registro</a></li>
+            <li><a href="{% url "contact" %}">Contacto</a></li>
+            <li><a href="{% url "legal" %}">Legal</a></li>
+        </ul>
+    </nav>
+    <style>
+        .main-nav ul {
+            list-style: none;
+            padding: 10;
+            margin: 0;
+            display: flex;
+        }
+        .main-nav li {
+            margin-right: 20px;
+            background-color: #791c1cff;
+            padding: 10;
+        }
+        .main-nav a {
+            padding: 10;
+            text-decoration: none;
+            color: #1d1010ff;
+        }
+    </style>
+</header>
