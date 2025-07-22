@@ -1,21 +1,18 @@
-<div class="row mt-2 mb-2">
+  <div class="row mt-2 mb-2">
     <div class="col-sm">
-        {% for message in messages %}
-        <div class="alert
+      {% for message in messages %}
+      <div class="alert
             {% if message.tags %}
-             {% if message.tags == "error" %}
+              {% if message.tags == 'error' %}
                 alert-danger
-            {% else %}
+              {% else %}
                 alert-{{ message.tags }}
-                {% endif %}
+              {% endif %}
             {% else %}
-                alert-{{ message.tags}}
-                {% endif %}
-            {% else %}
-                alert-info
+              alert-info
             {% endif %}">
-            {{ message }}
-        </div>
-        {% endfor %}
+        {{ message }}
+      </div>
+      {% endfor %}
     </div>
-</div>
+  </div>
