@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = BASE_DIR / "instagram" / "templates"
+TEMPLATES_DIR = BASE_DIR / "instagrans2" / "templates"
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -28,10 +28,11 @@ INSTALLED_APPS = [
     "django_extensions",
     "crispy_forms",
     "crispy_bootstrap5",
+    'bootstrap5',
 
     "profiles",
     "posts",
-    "notifications"
+    "nitifications"
 ]
 
 MIDDLEWARE = [
@@ -44,7 +45,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "instagram.urls"
+ROOT_URLCONF = "instagrans2.urls"
 
 TEMPLATES = [
     {
@@ -64,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "instagram.wsgi.application"
+WSGI_APPLICATION = "instagrans2.wsgi.application"
 
 
 DATABASES = {
