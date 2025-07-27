@@ -1,25 +1,22 @@
 {% extends "general/layout.html" %}
 {% load crispy_forms_tags %}
 
-{% block head_title %}Bienvenido a nuestro instagrans2{% endblock %}
+{% block head_title %}Nueva publicación{% endblock %}
 
 {% block page_content %}
 <div class="container">
   {% include '_includes/_messages.html' %}
 
-
-  <h1>Inicio de sesión</h1>
-
-    <form action="" method="post">
+  <h1>Nueva publicación</h1>
+    <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="row">
         <div class="col-12 col-sm-6">
-          {{ form.username|as_crispy_field }}
-          {{ form.password|as_crispy_field }}
+          {{ form.image|as_crispy_field }}
+          {{ form.caption|as_crispy_field }}
         </div>
       </div>
-      <button class="btn btn-secondary">Iniciar sesión</button>
+      <button class="btn btn-secondary">Publicar</button>
     </form>
-
 </div>
 {% endblock %}
