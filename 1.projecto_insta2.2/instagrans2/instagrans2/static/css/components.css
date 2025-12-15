@@ -298,7 +298,7 @@
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    color: var(--color-text-primary);
+    color: var(--color-text-primary) !important;
     font-family: var(--font-body);
     font-size: var(--font-size-base);
     transition: all var(--transition-base);
@@ -309,6 +309,7 @@
     border-color: var(--color-accent-purple);
     box-shadow: 0 0 0 3px rgba(103, 126, 234, 0.1);
     background: var(--color-bg-medium);
+    color: var(--color-text-primary) !important;
 }
 
 .form-control::placeholder {
@@ -618,28 +619,16 @@ footer a:hover {
 }
 
 /* === GRID LAYOUT === */
-.row {
+/* Removed conflicting custom row styles to let Bootstrap handle the grid */
+.grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
 }
 
-@media (min-width: 768px) {
-    .row.cols-2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .row.cols-3 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 
 @media (max-width: 767px) {
-    .row {
-        grid-template-columns: 1fr;
-    }
-
     .nav-list {
         flex-direction: column;
         align-items: stretch;

@@ -27,7 +27,7 @@
 
           <div class="profile-info-mini">
             <h5 class="profile-username-mini">{{ profile.user.username }}</h5>
-            <p class="profile-bio-mini">{{ profile.bio|default_if_none:"Sin biografía" }}</p>
+            <p class="profile-bio-mini">{{ profile.bio|default_if_none:"Sin biografía"|striptags }}</p>
 
             <div class="profile-stats-mini">
               <span class="stat-mini">
