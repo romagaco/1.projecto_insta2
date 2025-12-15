@@ -1,28 +1,52 @@
 {% extends "general/layout.html" %}
 
-{% block head_title %}Bienvenido a nuestro InstaConquer{% endblock %}
+{% block head_title %}Perfiles - InstaConquer{% endblock %}
 
 {% block page_content %}
-<div class="container">
-  {% include '_includes/_messages.html' %}
+<div class="main-content">
+  <div class="container">
+    {% include '_includes/_messages.html' %}
 
-  <h1>Perfiles</h1>
-  <div class="row">
-    {% for profile in profiles %}
-    <article class="col-12 col-sm-4">
-      <h5>{{ profile.user.username }}</h5>
-      <p>
-        {% if profile.profile_picture %}
-          <img width="100" src="{{ profile.profile_picture.url }}" alt="">
-        {% else %}
-          No dispone de foto de perfil
-        {% endif %}
-      </p>
-      <p>{{ profile.bio|default_if_none:"Sin rellenar" }}</p>
-      <p>Seguidores: {{ profile.followers.count }}</p>
-      <p><a href="{% url 'profile_detail' profile.pk %}">Ver perfil</a></p>
-    </article>
-    {% endfor %}
+    <h1>Perfiles</h1>
+
+    <div class="row">
+      {% for profile in profiles %}
+      <article class="col-12 col-sm-6 col-lg-4">
+        <div class="profile-card-mini">
+          <div class="profile-picture-wrapper-mini">
+            {% if profile.profile_picture %}
+            <div class="profile-picture-mini">
+              <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}">
+            </div>
+            {% else %}
+            <div class="profile-picture-placeholder-mini">
+              <i class="bi bi-person-circle"></i>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="profile-info-mini">
+            <h5 class="profile-username-mini">{{ profile.user.username }}</h5>
+            <p class="profile-bio-mini">{{ profile.bio|default_if_none:"Sin biografía" }}</p>
+
+            <div class="profile-stats-mini">
+              <span class="stat-mini">
+                <i class="bi bi-people"></i> {{ profile.followers.count }} seguidores
+              </span>
+            </div>
+
+            <a href="{% url 'profile_detail' profile.pk %}" class="btn btn-primary btn-sm">
+              Ver perfil
+            </a>
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <div class="col-12">
+        <p class="text-center text-muted">No hay perfiles para mostrar</p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

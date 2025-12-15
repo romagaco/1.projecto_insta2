@@ -1,77 +1,103 @@
 {% extends "general/layout.html" %}
 {% load crispy_forms_tags %}
 
-{% block head_title %}Bienvenido a nuestro InstaConquer{% endblock %}
+{% block head_title %}Detalle de publicación - InstaConquer{% endblock %}
 
 {% block page_content %}
-<div class="container">
-  {% include '_includes/_messages.html' %}
+<div class="main-content">
+  <div class="container">
+    {% include '_includes/_messages.html' %}
 
-  <h1>Detalle de publicación</h1>
-  <div class="row">
-    <article class="col-md-4">
-      <div class="bg-white border mt-2">
-      <div>
-          <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
-              <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle" src="{{ post.user.profile.profile_picture.url }}" width="45">
-                  <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">{{ post.user.first_name }}</span><span class="text-black-50 time">{{ post.created_at }}</span></div>
+    <h1>Detalle de publicación</h1>
+
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <article class="post-card">
+          <!-- Post Header -->
+          <div class="post-header">
+            <div class="post-user-info">
+              <div class="post-avatar">
+                <img src="{{ post.user.profile.profile_picture.url }}" alt="{{ post.user.first_name }}">
               </div>
-              <div class="feed-icon px-2"><i class="fa fa-ellipsis-v text-black-50"></i></div>
+              <div class="post-user-details">
+                <span class="post-username">{{ post.user.first_name }}</span>
+                <span class="post-timestamp">{{ post.created_at }}</span>
+              </div>
+            </div>
           </div>
-      </div>
-      <div class="p-2 px-3"><span>{{ post.caption }}</span></div>
-      <div class="feed-image p-2 px-3">
-        <img class="img-fluid img-responsive" src="{{ post.image.url }}">
-      </div>
-      <div class="text-center">
-        {% if request.user.is_authenticated %}
-          <p>
-            <a href="{% url 'post_like_ajax' post.pk %}" class="likeButton">
-              <span>{{ post.likes.all.count }}</span>
-              {% if request.user in post.likes.all %}
-                <i class="bi bi-suit-heart-fill"></i>
-              {% else %}
-                <i class="bi bi-heart"></i>
-              {% endif %}
-            </a>
-          </p>
-        {% endif %}
-      </div>
-      <section class="comments p-2 px-3">
-        <h5>Comentarios</h5>
-        {% if post.comments.all.count %}
-          {% for comment in post.comments.all %}
-            <article>
-              <header>
-                <strong>Autor:</strong> {{ comment.user }} <strong>Creado el:</strong> {{ comment.created_at }}
-              </header>
-              <div>
-                <p>{{ comment.text }}</p>
-              </div>
-            </article>
-          {% endfor %}
-        {% else %}
-          <p>Todavía no hay comentarios para esta publicación</p>
-        {% endif %}
 
-        <div>
-          <details>
-            <summary>Nuevo comentario</summary>
-            <form method="post">
-              <div class="row">
-                <div class="col col-12">
+          <!-- Post Caption -->
+          {% if post.caption %}
+          <div class="post-caption">
+            <p>{{ post.caption }}</p>
+          </div>
+          {% endif %}
+
+          <!-- Post Image -->
+          <div class="post-image-wrapper">
+            <img class="post-image" src="{{ post.image.url }}" alt="Post image">
+          </div>
+
+          <!-- Post Actions -->
+          <footer class="post-actions">
+            {% if request.user.is_authenticated %}
+            <div class="post-stats">
+              <a href="{% url 'post_like_ajax' post.pk %}" class="like-button">
+                <span>{{ post.likes.all.count }}</span>
+                {% if request.user in post.likes.all %}
+                <i class="bi bi-suit-heart-fill"></i>
+                {% else %}
+                <i class="bi bi-heart"></i>
+                {% endif %}
+              </a>
+              <span class="comment-count">
+                {{ post.comments.all.count }} <i class="bi bi-chat-dots"></i>
+              </span>
+            </div>
+            {% endif %}
+          </footer>
+
+          <!-- Comments Section -->
+          <section class="comments-section">
+            <h5 class="comments-heading">Comentarios</h5>
+
+            <div class="comments-list">
+              {% if post.comments.all.count %}
+              {% for comment in post.comments.all %}
+              <article class="comment-item">
+                <header class="comment-header">
+                  <strong>{{ comment.user.first_name }}</strong>
+                  <span class="comment-time">{{ comment.created_at }}</span>
+                </header>
+                <div class="comment-body">
+                  <p>{{ comment.text }}</p>
+                </div>
+              </article>
+              {% endfor %}
+              {% else %}
+              <p class="no-comments">Todavía no hay comentarios para esta publicación</p>
+              {% endif %}
+            </div>
+
+            <!-- New Comment Form -->
+            {% if request.user.is_authenticated %}
+            <div class="new-comment-wrapper">
+              <details class="comment-details">
+                <summary class="comment-summary">Nuevo comentario</summary>
+                <form method="post" class="comment-form">
                   {% csrf_token %}
-                  {{ form.text|as_crispy_field }}
-                </div>
-                <div class="col col-12">
-                  <button class="btn btn-sm btn-primary">Publicar</button>
-                </div>
-              </div>
-            </form>
-          </details>
-        </div>
-      </section>
-    </article>
+                  <div class="form-group">
+                    {{ form.text|as_crispy_field }}
+                  </div>
+                  <button class="btn btn-primary btn-sm">Publicar</button>
+                </form>
+              </details>
+            </div>
+            {% endif %}
+          </section>
+        </article>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

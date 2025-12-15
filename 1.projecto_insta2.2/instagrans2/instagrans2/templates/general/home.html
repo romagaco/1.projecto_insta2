@@ -3,21 +3,24 @@
 {% block head_title %}Bienvenido a instagrans2 {% endblock %}
 
 {% block page_content %}
-<div class="container">
-  {% include '_includes/_messages.html' %}
+<div class="main-content">
+  <div class="container">
+    {% include '_includes/_messages.html' %}
 
-  <h1>Homepage</h1>
-  <p>¡Bienvenido a Instagrans2!</p>
-  <section>
-    <h2>Últimas publicaciones</h2>
+    <h1 class="text-gradient">Homepage</h1>
+    <p>¡Bienvenido a Instagrans2!</p>
 
-    <div class="row">
-      {% for post in last_posts %}
-        <div class="col-12 col-sm-6 col-md-4">
+    <section>
+      <h2>Últimas publicaciones</h2>
+
+      <div class="row">
+        {% for post in last_posts %}
+        <div class="fade-in">
           {% include '_includes/posts/_post.html' %}
         </div>
-      {% endfor %}
-    </div>
-  </section>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
 </div>
 {% endblock %}

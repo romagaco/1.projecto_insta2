@@ -1,42 +1,22 @@
-<header>
+<header class="navbar">
   <div class="container">
-    <h1>InstaConquer</h1>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'profile_list' %}">Perfiles</a></li>
+    <h1 class="nav-brand">InstaConquer</h1>
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Inicio</a></li>
+        <li class="nav-item"><a href="{% url 'profile_list' %}" class="nav-link">Perfiles</a></li>
         {% if not request.user.is_authenticated %}
-          <li><a href="{% url 'login' %}">Login</a></li>
-          <li><a href="{% url 'register' %}">Registro</a></li>
+        <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Registro</a></li>
         {% endif %}
-        <li><a href="{% url 'contact' %}">Contacto</a></li>
+        <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contacto</a></li>
         {% if request.user.is_authenticated %}
-          <li><a href="{% url 'post_create' %}">Publicar</a></li>
-          <li><a href="{% url 'profile_detail' request.user.profile.pk %}">Mi perfil</a></li>
-          <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+        <li class="nav-item"><a href="{% url 'post_create' %}" class="nav-link">Publicar</a></li>
+        <li class="nav-item"><a href="{% url 'profile_detail' request.user.profile.pk %}" class="nav-link">Mi perfil</a>
+        </li>
+        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Cerrar sesión</a></li>
         {% endif %}
       </ul>
     </nav>
   </div>
-</header>
-    <style>
-        .main-nav ul {
-            list-style: none;
-            padding: 10;
-            margin: 0;
-            display: flex;
-        }
-        .main-nav li {
-            margin-right: 20px;
-            background-color: #791c1cff;
-            padding: 10;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .main-nav a {
-            padding: 10;
-            text-decoration: none;
-            color: #1d1010ff;
-        }
-    </style>
 </header>
