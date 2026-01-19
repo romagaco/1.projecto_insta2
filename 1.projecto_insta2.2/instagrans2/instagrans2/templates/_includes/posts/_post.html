@@ -2,7 +2,11 @@
   <div class="post-header">
     <div class="post-user-info">
       <div class="post-avatar">
+        {% if post.user.profile.profile_picture %}
         <img src="{{ post.user.profile.profile_picture.url }}" alt="{{ post.user.first_name }}">
+        {% else %}
+        <i class="bi bi-person-circle"></i>
+        {% endif %}
       </div>
       <div class="post-user-details">
         <span class="post-username">{{ post.user.first_name }}</span>
